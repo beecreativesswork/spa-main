@@ -1,0 +1,94 @@
+@import "tailwindcss";
+
+@layer base {
+  :root {
+    --bg-cream: #FBF9F5;
+    --bg-sand: #F3ECE1;
+    --bg-linen: #E8DEC9;
+    --card-bg: #FAF6EF;
+    --text-primary: #1C1512;
+    --text-secondary: #594D46;
+    --text-muted: #8C7B70;
+    --accent-sage: #52634F;
+    --accent-terracotta: #B6583B;
+    --accent-gold: #C29B53;
+    --border-subtle: #E6DBCB;
+    --border-medium: #D1C2AD;
+  }
+
+  html {
+    scroll-behavior: smooth;
+    background-color: var(--bg-cream);
+    color: var(--text-primary);
+    selection-background-color: #B6583B;
+    selection-color: #FAF6EF;
+  }
+
+  body {
+    background-color: var(--bg-cream);
+    color: var(--text-primary);
+    font-family: var(--font-sans), sans-serif;
+    overflow-x: hidden;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  h1, h2, h3, h4, .font-serif {
+    font-family: var(--font-serif), Georgia, serif;
+  }
+}
+
+/* Custom Luxury Scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+}
+::-webkit-scrollbar-track {
+  background: #F5EFE4;
+}
+::-webkit-scrollbar-thumb {
+  background: #C4B59D;
+  border-radius: 3px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #A39175;
+}
+
+/* Noise overlay texture */
+.bg-noise {
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.035'/%3E%3C/svg%3E");
+}
+
+/* Soft Ambient Radial Lighting */
+.bg-ambient-light {
+  background: radial-gradient(circle at 50% 20%, rgba(244, 235, 220, 0.8) 0%, rgba(251, 249, 245, 0) 70%);
+}
+
+.bg-ambient-warmth {
+  background: radial-gradient(ellipse at 80% 50%, rgba(214, 184, 150, 0.15) 0%, rgba(251, 249, 245, 0) 60%);
+}
+
+/* Custom Text Gradient (Restrained Gold/Earth) */
+.text-gradient-earth {
+  background: linear-gradient(135deg, #1C1512 30%, #594D46 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.text-gradient-sage {
+  background: linear-gradient(135deg, #374635 0%, #52634F 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+/* Luxury Card Shadow & Hover */
+.shadow-editorial {
+  box-shadow: 0 10px 40px -15px rgba(28, 21, 18, 0.05);
+}
+
+.shadow-editorial-hover {
+  transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.shadow-editorial-hover:hover {
+  box-shadow: 0 20px 50px -15px rgba(28, 21, 18, 0.1);
+  transform: translateY(-2px);
+}
