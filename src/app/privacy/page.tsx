@@ -91,7 +91,7 @@ export default function PrivacyPage() {
             {/* Updates */}
             <div className="pt-6 border-t border-[#E6DBCB] text-xs text-[#8C7B70]">
               <p>
-                {SITE_CONFIG.name} • Second Floor, C-Wing, Gaikwad Nagar Rd, above Darshan Plywood, Punawale, Pimpri-Chinchwad, Maharashtra 411033
+                {SITE_CONFIG.name} • {SITE_CONFIG.address.formatted} • Phone: {SITE_CONFIG.phoneFormatted}
               </p>
             </div>
           </div>

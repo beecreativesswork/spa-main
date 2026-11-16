@@ -1,7 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { Star, ShieldCheck, MapPin, ExternalLink } from "lucide-react";
+import { Star, ShieldCheck, ExternalLink } from "lucide-react";
 import { GOOGLE_RATING_INFO, REVIEWS_SENTIMENT_THEMES } from "@/data/reviews";
 import { GOOGLE_MAPS_URL } from "@/lib/maps";
 

@@ -5,15 +5,20 @@ import Breadcrumbs from "@/components/ui/Breadcrumbs";
 import Services from "@/components/services/Services";
 import FAQSection from "@/components/faq/FAQSection";
 import CustomCursor from "@/components/ui/CustomCursor";
+import { SITE_CONFIG } from "@/lib/site";
 
 export const metadata: Metadata = {
-  title: "Massage & Wellness Services | Vedic Wellness Center",
+  title: "Massage & Wellness Services | Vedic Wellness Center Punawale",
   description:
-    "Explore therapeutic massage and body care services at Vedic Wellness Center in Punawale, Pimpri-Chinchwad. Swedish, Deep Tissue, and custom relaxation sessions.",
+    "Explore authentic massage and wellness services at Vedic Wellness Center in Punawale, Pimpri-Chinchwad. Ayurvedic Abhyanga, Swedish, Deep Tissue, Aromatherapy, Head & Shoulder, and Foot reflexology.",
   openGraph: {
-    title: "Massage & Wellness Services | Vedic Wellness Center",
+    title: "Massage & Wellness Services | Vedic Wellness Center Punawale",
     description:
-      "Therapeutic massage sessions tailored for body relief, muscle recovery, and deep relaxation in Punawale.",
+      "Therapeutic massage and Ayurvedic bodywork tailored for muscle relief, tension release, and deep relaxation in Punawale, Pimpri-Chinchwad.",
+    url: `${SITE_CONFIG.url}/services`,
+  },
+  alternates: {
+    canonical: `${SITE_CONFIG.url}/services`,
   },
 };
 

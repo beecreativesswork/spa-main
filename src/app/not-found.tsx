@@ -28,11 +28,11 @@ export default function NotFound() {
           </span>
 
           <h1 className="font-serif text-3xl sm:text-5xl md:text-6xl text-[#1C1512] font-normal tracking-tight mb-4">
-            You've wandered a little off the path.
+            You&apos;ve wandered a little off the path.
           </h1>
 
           <p className="text-base sm:text-lg text-[#594D46] font-serif italic max-w-xl mx-auto mb-10">
-            "The space you're looking for isn't here, but your moment of calm can still be."
+            &ldquo;The space you&apos;re looking for isn&apos;t here, but your moment of calm can still be.&rdquo;
           </p>
 
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4 max-w-md mx-auto">

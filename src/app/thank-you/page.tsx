@@ -5,7 +5,7 @@ import Footer from "@/components/footer/Footer";
 import Breadcrumbs from "@/components/ui/Breadcrumbs";
 import CustomCursor from "@/components/ui/CustomCursor";
 import { getWhatsAppBookingUrl } from "@/lib/whatsapp";
-import { Sparkles, MessageSquare, ArrowLeft, CheckCircle2 } from "lucide-react";
+import { MessageSquare, ArrowLeft, CheckCircle2 } from "lucide-react";
 
 export const metadata: Metadata = {
   title: "Thank You | Vedic Wellness Center",
@@ -38,7 +38,7 @@ export default function ThankYouPage() {
             Thank you.
           </h1>
           <p className="text-lg text-[#B6583B] font-serif italic mb-8">
-            "Your request has been received."
+            &ldquo;Your request has been received.&rdquo;
           </p>
 
           {/* What Happens Next Card */}

@@ -1,9 +1,19 @@
 "use client";
 
-import React, { useRef, useState, useEffect, Suspense } from "react";
+import React, { useRef, useState, useEffect, Suspense, useSyncExternalStore } from "react";
 import { Canvas, useFrame } from "@react-three/fiber";
 import { ContactShadows } from "@react-three/drei";
 import * as THREE from "three";
+
+const emptySubscribe = () => () => {};
+
+function useMounted() {
+  return useSyncExternalStore(
+    emptySubscribe,
+    () => true,
+    () => false
+  );
+}
 
 interface FloatingPlaqueProps {
   texture: THREE.Texture;
@@ -85,50 +95,70 @@ function FloatingEmblemPlaque({ texture, prefersReducedMotion }: FloatingPlaqueP
   );
 }
 
+function usePrefersReducedMotion() {
+  return useSyncExternalStore(
+    (callback) => {
+      const mediaQuery = window.matchMedia("(prefers-reduced-motion: reduce)");
+      mediaQuery.addEventListener("change", callback);
+      return () => mediaQuery.removeEventListener("change", callback);
+    },
+    () => window.matchMedia("(prefers-reduced-motion: reduce)").matches,
+    () => false
+  );
+}
+
+function checkWebGLSupport(): boolean {
+  if (typeof window === "undefined") return false;
+  try {
+    const canvas = document.createElement("canvas");
+    return !!(
+      window.WebGLRenderingContext &&
+      (canvas.getContext("webgl") || canvas.getContext("experimental-webgl"))
+    );
+  } catch {
+    return false;
+  }
+}
+
+function useHasWebGL() {
+  return useSyncExternalStore(
+    emptySubscribe,
+    checkWebGLSupport,
+    () => false
+  );
+}
+
 export default function SculpturalCanvas() {
-  const [mounted, setMounted] = useState(false);
-  const [hasWebGL, setHasWebGL] = useState(true);
-  const [prefersReducedMotion, setPrefersReducedMotion] = useState(false);
+  const mounted = useMounted();
+  const prefersReducedMotion = usePrefersReducedMotion();
+  const hasWebGL = useHasWebGL();
   const [texture, setTexture] = useState<THREE.Texture | null>(null);
   const [loadFailed, setLoadFailed] = useState(false);
 
   useEffect(() => {
-    setMounted(true);
-
-    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
-      setPrefersReducedMotion(true);
-    }
+    if (!hasWebGL) return;
 
     try {
-      const canvas = document.createElement("canvas");
-      const isSupported = !!(
-        window.WebGLRenderingContext &&
-        (canvas.getContext("webgl") || canvas.getContext("experimental-webgl"))
+      const loader = new THREE.TextureLoader();
+      loader.load(
+        "/images/vedic-wellness-logo-transparent.png",
+        (tex) => {
+          tex.colorSpace = THREE.SRGBColorSpace;
+          tex.minFilter = THREE.LinearFilter;
+          tex.magFilter = THREE.LinearFilter;
+          tex.generateMipmaps = true;
+          tex.needsUpdate = true;
+          setTexture(tex);
+        },
+        undefined,
+        () => {
+          setLoadFailed(true);
+        }
       );
-      setHasWebGL(isSupported);
-
-      if (isSupported) {
-        const loader = new THREE.TextureLoader();
-        loader.load(
-          "/images/vedic-wellness-logo-transparent.png",
-          (tex) => {
-            tex.colorSpace = THREE.SRGBColorSpace;
-            tex.minFilter = THREE.LinearFilter;
-            tex.magFilter = THREE.LinearFilter;
-            tex.generateMipmaps = true;
-            tex.needsUpdate = true;
-            setTexture(tex);
-          },
-          undefined,
-          () => {
-            setLoadFailed(true);
-          }
-        );
-      }
     } catch {
-      setHasWebGL(false);
+      queueMicrotask(() => setLoadFailed(true));
     }
-  }, []);
+  }, [hasWebGL]);
 
   const staticFallback = (
     <div className="w-full h-full flex items-center justify-center p-6">

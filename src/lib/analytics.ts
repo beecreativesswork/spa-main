@@ -17,7 +17,8 @@ export type AnalyticsEvent =
   | "whatsapp_click"
   | "service_view"
   | "service_booking_click"
-  | "directions_click";
+  | "directions_click"
+  | "phone_call_click";
 
 export function trackEvent(
   event: AnalyticsEvent,

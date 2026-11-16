@@ -5,15 +5,16 @@ import Breadcrumbs from "@/components/ui/Breadcrumbs";
 import Location from "@/components/location/Location";
 import FAQSection from "@/components/faq/FAQSection";
 import CustomCursor from "@/components/ui/CustomCursor";
+import { SITE_CONFIG } from "@/lib/site";
 
 export const metadata: Metadata = {
-  title: "Contact Vedic Wellness Center | Punawale",
+  title: "Contact & Location | Vedic Wellness Center Punawale",
   description:
-    "Contact Vedic Wellness Center in Punawale, Pimpri-Chinchwad. Located on Gaikwad Nagar Rd above Darshan Plywood. Open 24 hours for massage & wellness bookings.",
+    `Contact Vedic Wellness Center in Punawale, Pimpri-Chinchwad. Located at ${SITE_CONFIG.address.shortFormatted}. Open 24 hours for massage & wellness reservations. Call ${SITE_CONFIG.phoneFormatted}.`,
   openGraph: {
-    title: "Contact Vedic Wellness Center | Punawale",
+    title: "Contact & Location | Vedic Wellness Center Punawale",
     description:
-      "Get directions, opening hours, and direct WhatsApp booking for Vedic Wellness Center in Punawale.",
+      `Get directions, verified address at 18 Longitude Punawale, direct phone ${SITE_CONFIG.phoneFormatted}, and instant WhatsApp booking for Vedic Wellness Center.`,
   },
 };
 

@@ -2,8 +2,7 @@
 
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { ChevronDown, HelpCircle, MessageSquare } from "lucide-react";
-import { SITE_CONFIG } from "@/lib/site";
+import { ChevronDown, MessageSquare } from "lucide-react";
 import { getWhatsAppBookingUrl } from "@/lib/whatsapp";
 import { trackEvent } from "@/lib/analytics";
 
@@ -11,7 +10,7 @@ export const FAQS = [
   {
     question: "Where is Vedic Wellness Center located?",
     answer:
-      "Vedic Wellness Center is located at Second Floor, C-Wing, Gaikwad Nagar Rd, above Darshan Plywood, Punawale, Pimpri-Chinchwad, Maharashtra 411033, India.",
+      "Vedic Wellness Center is located at C-Wing, 18 Longitude, Second Floor, Building, Gaikwad Nagar Rd, Above Darshan Plywood, Punawale, Pimpri-Chinchwad, Maharashtra 411033, India. For directions or inquiries, you can also call us directly at +91 9623115557.",
   },
   {
     question: "What are the opening hours?",
@@ -21,7 +20,7 @@ export const FAQS = [
   {
     question: "How can I book a massage?",
     answer:
-      "You can easily reserve a session by sending a direct message via WhatsApp or by reaching out directly to the center staff to check real-time therapist availability.",
+      "You can easily reserve a session by calling us directly at +91 9623115557 or sending a message via WhatsApp to check real-time therapist availability.",
   },
   {
     question: "How do I contact the center on WhatsApp?",

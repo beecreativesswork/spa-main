@@ -3,9 +3,10 @@
 import dynamic from "next/dynamic";
 import Link from "next/link";
 import { motion } from "framer-motion";
-import { Star, ArrowDownRight, Sparkles } from "lucide-react";
+import { Star, ArrowDownRight, Sparkles, Phone } from "lucide-react";
 import { getWhatsAppBookingUrl } from "@/lib/whatsapp";
 import { trackEvent } from "@/lib/analytics";
+import { SITE_CONFIG } from "@/lib/site";
 
 // Dynamic import with SSR disabled to prevent hydration mismatch for WebGL
 const SculpturalCanvas = dynamic(() => import("./SculpturalCanvas"), {
@@ -26,6 +27,10 @@ export default function Hero() {
   const handleBookingClick = () => {
     trackEvent("whatsapp_click", { location: "hero_primary" });
     trackEvent("service_booking_click", { location: "hero_primary" });
+  };
+
+  const handlePhoneClick = () => {
+    trackEvent("phone_call_click", { location: "hero_phone" });
   };
 
   const handleServicesClick = () => {
@@ -50,7 +55,7 @@ export default function Hero() {
           className="lg:col-span-7 flex flex-col justify-center"
         >
           {/* Rating Badge */}
-          <div className="inline-flex items-center space-x-2 px-3.5 py-1 rounded-full bg-[#FAF6EF] border border-[#E6DBCB] text-xs text-[#594D46] w-fit mb-4 md:mb-6 shadow-sm">
+          <div className="inline-flex items-center space-x-2 px-3.5 py-1 rounded-full bg-[#FAF6EF] border border-[#E6DBCB] text-xs text-[#594D46] w-fit mb-4 md:mb-6 shadow-xs">
             <div className="flex items-center text-[#C29B53]">
               <Star size={12} className="fill-[#C29B53]" />
               <span className="ml-1 font-semibold">5.0</span>
@@ -61,7 +66,7 @@ export default function Hero() {
 
           {/* Hindi Title Subheading */}
           <span className="text-xs uppercase tracking-[0.3em] text-[#8C7B70] font-sans font-medium mb-2 md:mb-3">
-            वैदिक वेलनेस सेंटर • Contemporary Luxury Spa
+            {SITE_CONFIG.hindiName} • Contemporary Vedic Sanctuary
           </span>
 
           {/* Main Title */}
@@ -73,29 +78,38 @@ export default function Hero() {
 
           {/* Editorial Paragraph */}
           <p className="text-sm sm:text-base md:text-lg text-[#594D46] max-w-xl font-light leading-relaxed mb-6 md:mb-8">
-            Located in Punawale, Pimpri-Chinchwad. We offer a quiet sanctuary away from daily hurry — inviting you to restore equilibrium through traditional touch and modern comfort.
+            Located in Punawale, Pimpri-Chinchwad. We offer a quiet sanctuary away from daily hurry — inviting you to restore equilibrium through traditional touch, herbal oils, and modern comfort.
           </p>
 
           {/* CTAs - Optimized for immediate above-the-fold visibility on both mobile & desktop */}
-          <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3 sm:gap-5">
+          <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3 sm:gap-4">
             <a
               href={getWhatsAppBookingUrl()}
               target="_blank"
               rel="noopener noreferrer"
               onClick={handleBookingClick}
-              className="inline-flex items-center justify-center px-7 py-3.5 md:py-4 text-xs uppercase tracking-widest font-medium text-[#FAF6EF] bg-[#1C1512] hover:bg-[#B6583B] transition-all duration-300 shadow-md group"
+              className="inline-flex items-center justify-center px-7 py-3.5 md:py-4 text-xs uppercase tracking-widest font-medium text-[#FAF6EF] bg-[#1C1512] hover:bg-[#B6583B] transition-all duration-300 shadow-sm group"
             >
               <span>Book a Session</span>
               <Sparkles size={14} className="ml-2 group-hover:scale-110 transition-transform" />
             </a>
 
+            <a
+              href={SITE_CONFIG.phoneTel}
+              onClick={handlePhoneClick}
+              className="inline-flex items-center justify-center px-6 py-3.5 md:py-4 text-xs uppercase tracking-widest font-medium text-[#1C1512] border border-[#1C1512]/30 hover:border-[#1C1512] bg-[#FAF6EF]/60 hover:bg-[#FAF6EF] transition-all duration-300 group"
+            >
+              <Phone size={14} className="mr-2 text-[#B6583B]" />
+              <span>{SITE_CONFIG.phoneFormatted}</span>
+            </a>
+
             <Link
               href="#services"
               onClick={handleServicesClick}
-              className="inline-flex items-center justify-center px-7 py-3.5 md:py-4 text-xs uppercase tracking-widest font-medium text-[#1C1512] border border-[#1C1512]/30 hover:border-[#1C1512] bg-transparent transition-all duration-300 group"
+              className="inline-flex items-center justify-center px-6 py-3.5 md:py-4 text-xs uppercase tracking-widest font-medium text-[#594D46] hover:text-[#1C1512] bg-transparent transition-all duration-300 group"
             >
-              <span>Explore Services</span>
-              <ArrowDownRight size={15} className="ml-2 group-hover:translate-x-0.5 group-hover:translate-y-0.5 transition-transform" />
+              <span>Services</span>
+              <ArrowDownRight size={15} className="ml-1 group-hover:translate-x-0.5 group-hover:translate-y-0.5 transition-transform" />
             </Link>
           </div>
 
@@ -105,7 +119,7 @@ export default function Hero() {
               <span className="font-semibold text-[#52634F]">Open 24 Hours</span>
             </div>
             <span>•</span>
-            <div>Second Floor, C-Wing, Gaikwad Nagar Rd, Punawale</div>
+            <div>{SITE_CONFIG.address.shortFormatted}</div>
           </div>
         </motion.div>
 
@@ -114,7 +128,7 @@ export default function Hero() {
           initial={{ opacity: 0, scale: 0.95 }}
           animate={{ opacity: 1, scale: 1 }}
           transition={{ duration: 1.1, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
-          className="lg:col-span-5 h-[280px] sm:h-[380px] lg:h-[500px] relative flex items-center justify-center"
+          className="lg:col-span-5 h-[300px] sm:h-[400px] lg:h-[500px] relative flex items-center justify-center"
         >
           {/* 3D Canvas Container */}
           <div className="w-full h-full relative z-10">
@@ -122,8 +136,8 @@ export default function Hero() {
           </div>
 
           {/* Caption Tag */}
-          <div className="absolute bottom-4 right-4 bg-[#FAF6EF]/90 backdrop-blur-sm border border-[#E6DBCB] px-3 py-1 text-[10px] md:text-[11px] text-[#8C7B70] tracking-wider uppercase z-20">
-            Punawale Studio • A Space For Slowing Down
+          <div className="absolute bottom-4 right-4 bg-[#FAF6EF]/90 backdrop-blur-xs border border-[#E6DBCB] px-3 py-1 text-[10px] md:text-[11px] text-[#8C7B70] tracking-wider uppercase z-20">
+            18 Longitude • Punawale Studio
           </div>
         </motion.div>
       </div>

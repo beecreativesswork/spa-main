@@ -6,12 +6,14 @@ import Experience from "@/components/experience/Experience";
 import SpaceGallery from "@/components/gallery/SpaceGallery";
 import CustomCursor from "@/components/ui/CustomCursor";
 import { getWhatsAppBookingUrl } from "@/lib/whatsapp";
-import { Sparkles, CheckCircle2 } from "lucide-react";
+import { SITE_CONFIG } from "@/lib/site";
+import { GOOGLE_MAPS_URL } from "@/lib/maps";
+import { Sparkles, CheckCircle2, Phone, Navigation } from "lucide-react";
 
 export const metadata: Metadata = {
-  title: "Wellness Experience | Vedic Wellness Center",
+  title: "Wellness Experience | Vedic Wellness Center Punawale",
   description:
-    "Discover the quiet wellness experience at Vedic Wellness Center in Punawale. Clean environment, private room quality, and respectful massage care.",
+    "Discover the quiet wellness experience at Vedic Wellness Center in Punawale, Pimpri-Chinchwad. Clean environment, private room quality, and respectful massage care.",
   openGraph: {
     title: "Wellness Experience | Vedic Wellness Center",
     description:
@@ -56,7 +58,7 @@ export default function ExperiencePage() {
               The Vedic Experience
             </h1>
             <p className="text-base sm:text-lg text-[#594D46] font-light leading-relaxed mb-8">
-              Every detail at Vedic Wellness Center is intended to quiet noise and support physical recovery. From soft natural lighting to clean, prepared spaces, we invite you to experience restful touch in Punawale.
+              Every detail at Vedic Wellness Center is intended to quiet noise and support physical recovery. From soft natural lighting to clean, prepared spaces, we invite you to experience restful touch in Punawale, Pimpri-Chinchwad.
             </p>
           </div>
 
@@ -65,7 +67,7 @@ export default function ExperiencePage() {
             {verifiedAspects.map((aspect) => (
               <div
                 key={aspect.title}
-                className="bg-[#FAF6EF] border border-[#E6DBCB] p-6 shadow-sm"
+                className="bg-[#FAF6EF] border border-[#E6DBCB] p-6 shadow-xs"
               >
                 <CheckCircle2 size={20} className="text-[#52634F] mb-4" />
                 <h3 className="font-serif text-xl text-[#1C1512] mb-2 font-medium">
@@ -87,23 +89,47 @@ export default function ExperiencePage() {
       <SpaceGallery />
 
       {/* Experience Booking Banner */}
-      <section className="py-16 bg-[#F5EFE4] border-t border-[#E6DBCB]">
+      <section className="py-20 bg-[#F5EFE4] border-t border-[#E6DBCB]">
         <div className="max-w-4xl mx-auto px-6 text-center">
-          <h2 className="font-serif text-3xl md:text-4xl text-[#1C1512] font-normal mb-3">
+          <h2 className="font-serif text-3xl md:text-5xl text-[#1C1512] font-normal mb-3">
             Reserve Your Wellness Session
           </h2>
           <p className="text-sm text-[#594D46] font-light max-w-lg mx-auto mb-8">
-            Message our reception team on WhatsApp to reserve your quiet therapy session.
+            Connect directly with our reception team by phone or WhatsApp to reserve your quiet therapy session.
           </p>
-          <a
-            href={getWhatsAppBookingUrl()}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="inline-flex items-center space-x-2 px-8 py-4 bg-[#1C1512] hover:bg-[#B6583B] text-[#FAF6EF] text-xs font-medium uppercase tracking-widest transition-colors shadow-md"
-          >
-            <span>Book a Session</span>
-            <Sparkles size={14} />
-          </a>
+          <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
+            <a
+              href={getWhatsAppBookingUrl()}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="w-full sm:w-auto inline-flex items-center justify-center space-x-2 px-8 py-4 bg-[#1C1512] hover:bg-[#B6583B] text-[#FAF6EF] text-xs font-medium uppercase tracking-widest transition-colors shadow-md"
+            >
+              <span>Book on WhatsApp</span>
+              <Sparkles size={14} />
+            </a>
+
+            <a
+              href={SITE_CONFIG.phoneTel}
+              className="w-full sm:w-auto inline-flex items-center justify-center space-x-2 px-8 py-4 bg-[#FAF6EF] hover:bg-[#1C1512] hover:text-[#FAF6EF] text-[#1C1512] border border-[#1C1512] text-xs font-medium uppercase tracking-widest transition-colors"
+            >
+              <Phone size={14} />
+              <span>Call: {SITE_CONFIG.phoneFormatted}</span>
+            </a>
+
+            <a
+              href={GOOGLE_MAPS_URL}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="w-full sm:w-auto inline-flex items-center justify-center space-x-2 px-8 py-4 bg-[#FAF6EF] hover:bg-[#1C1512] hover:text-[#FAF6EF] text-[#1C1512] border border-[#1C1512] text-xs font-medium uppercase tracking-widest transition-colors"
+            >
+              <Navigation size={14} />
+              <span>Get Directions</span>
+            </a>
+          </div>
+
+          <div className="mt-8 text-xs text-[#8C7B70]">
+            {SITE_CONFIG.address.formatted}
+          </div>
         </div>
       </section>
 

@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import { motion } from "framer-motion";
 import { Compass, Feather, ShieldCheck } from "lucide-react";
 
@@ -11,7 +12,7 @@ export default function Experience() {
 
       <div className="max-w-7xl mx-auto px-6 md:px-12 relative z-10">
         {/* Asymmetrical Layout Header & Visual */}
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-start mb-20">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-center mb-20">
           {/* Left Column: Large Editorial Headline */}
           <motion.div
             initial={{ opacity: 0, y: 30 }}
@@ -27,12 +28,15 @@ export default function Experience() {
               We design every detail so you can{" "}
               <span className="italic font-light text-[#52634F]">pause</span>, release daily noise, and return to center.
             </h2>
-            <p className="text-base md:text-lg text-[#594D46] font-light leading-relaxed max-w-2xl">
+            <p className="text-base md:text-lg text-[#594D46] font-light leading-relaxed max-w-2xl mb-6">
               Vedic Wellness Center was conceived as a sanctuary of quiet comfort in Punawale. Grounded in ancient Indian principles of mindful care and contemporary therapy, our space offers personalized bodywork that restores physical ease and inner balance.
+            </p>
+            <p className="text-sm md:text-base text-[#8C7B70] font-light leading-relaxed max-w-2xl">
+              From pure botanical oils warmed in traditional brass vessels to pristine, private suites, our therapies allow tension to dissolve in uninterrupted silence.
             </p>
           </motion.div>
 
-          {/* Right Column: Visual Texture Composition (Organic Architecture & Linen Atmosphere) */}
+          {/* Right Column: AI-Generated Authentic Atmosphere Visual */}
           <motion.div
             initial={{ opacity: 0, scale: 0.96 }}
             whileInView={{ opacity: 1, scale: 1 }}
@@ -40,30 +44,36 @@ export default function Experience() {
             transition={{ duration: 0.9, delay: 0.2 }}
             className="lg:col-span-5 relative"
           >
-            <div className="relative aspect-[4/5] rounded-none overflow-hidden bg-[#E3D7C5] p-8 flex flex-col justify-between border border-[#D5C6B1] shadow-editorial">
-              {/* Soft Linen & Shadow Graphic Overlay */}
-              <div className="absolute inset-0 bg-gradient-to-tr from-[#1C1512]/10 via-transparent to-[#FAF6EF]/30 pointer-events-none" />
-              
-              <div className="relative z-10 flex justify-between items-start">
-                <span className="font-serif text-4xl italic text-[#52634F]">वैदिक</span>
-                <span className="text-[11px] uppercase tracking-widest text-[#8C7B70] border-b border-[#8C7B70]/40 pb-1">
+            <div className="relative aspect-[4/5] rounded-none overflow-hidden border border-[#D5C6B1] shadow-editorial group">
+              <Image
+                src="/images/experience/experience-atmosphere.webp"
+                alt="Atmospheric massage therapy preparation at Vedic Wellness Center"
+                fill
+                sizes="(max-width: 1024px) 100vw, 480px"
+                className="object-cover transition-transform duration-700 group-hover:scale-105"
+                loading="lazy"
+              />
+
+              {/* Editorial Gradient Overlay */}
+              <div className="absolute inset-0 bg-gradient-to-t from-[#1C1512]/85 via-[#1C1512]/20 to-transparent pointer-events-none" />
+
+              {/* Top Header Floating Tag */}
+              <div className="absolute top-6 left-6 right-6 flex justify-between items-start z-10">
+                <span className="font-serif text-3xl italic text-[#FAF6EF] drop-shadow-md">वैदिक</span>
+                <span className="text-[10px] uppercase tracking-widest text-[#FAF6EF] bg-[#1C1512]/60 backdrop-blur-xs px-2.5 py-1 border border-[#FAF6EF]/20">
                   Punawale Studio
                 </span>
               </div>
 
-              {/* Central Abstract Botanical Shadow Illustration */}
-              <div className="my-auto text-center relative z-10 py-12">
-                <div className="w-20 h-20 mx-auto rounded-full bg-[#FAF6EF] border border-[#D5C6B1] flex items-center justify-center text-[#52634F] shadow-sm mb-6">
-                  <Feather size={32} strokeWidth={1.2} />
+              {/* Bottom Quote & Info */}
+              <div className="absolute bottom-6 left-6 right-6 z-10 text-[#FAF6EF]">
+                <div className="font-serif text-xl sm:text-2xl font-light italic mb-2">
+                  &ldquo;Mindful touch, quiet atmosphere.&rdquo;
                 </div>
-                <div className="font-serif text-2xl text-[#1C1512] font-light italic">
-                  "Mindful touch, quiet atmosphere."
+                <div className="flex items-center justify-between text-xs text-[#D8C8B4] border-t border-[#FAF6EF]/20 pt-3">
+                  <span>Pristine Hygiene Standards</span>
+                  <span className="font-semibold text-[#A7CCA0]">Open 24 Hours</span>
                 </div>
-              </div>
-
-              <div className="relative z-10 flex items-center justify-between text-xs text-[#594D46] border-t border-[#D5C6B1]/60 pt-4">
-                <span>Clean & Hygienic Space</span>
-                <span className="font-semibold text-[#52634F]">Open 24 Hours</span>
               </div>
             </div>
           </motion.div>

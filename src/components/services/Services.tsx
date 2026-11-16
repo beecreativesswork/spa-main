@@ -1,11 +1,13 @@
 "use client";
 
 import { useState } from "react";
+import Image from "next/image";
 import { motion } from "framer-motion";
-import { ArrowUpRight, Sparkles, MessageSquare } from "lucide-react";
+import { ArrowUpRight, Sparkles, MessageSquare, Phone } from "lucide-react";
 import { SERVICES_DATA, Service } from "@/data/services";
 import ServiceModal from "./ServiceModal";
 import { getWhatsAppBookingUrl } from "@/lib/whatsapp";
+import { SITE_CONFIG } from "@/lib/site";
 
 export default function Services() {
   const [selectedService, setSelectedService] = useState<Service | null>(null);
@@ -18,14 +20,14 @@ export default function Services() {
         <div className="flex flex-col md:flex-row md:items-end justify-between mb-16 pb-8 border-b border-[#E6DBCB]">
           <div>
             <span className="text-xs uppercase tracking-[0.3em] text-[#8C7B70] font-sans font-medium block mb-3">
-              02 — Massage & Therapy
+              02 — Massage & Holistic Therapy
             </span>
             <h2 className="font-serif text-4xl sm:text-5xl md:text-6xl text-[#1C1512] font-normal tracking-tight">
               Our Services
             </h2>
           </div>
           <p className="text-base text-[#594D46] font-light max-w-md mt-4 md:mt-0 font-serif italic">
-            "Take a moment. Choose the experience that feels right for you."
+            &ldquo;Authentic Ayurvedic bodywork, restorative full-body care, and mindful relaxation.&rdquo;
           </p>
         </div>
 
@@ -44,28 +46,42 @@ export default function Services() {
                 onMouseEnter={() => setHoveredServiceId(service.id)}
                 onMouseLeave={() => setHoveredServiceId(null)}
                 onClick={() => setSelectedService(service)}
-                className="group relative py-8 md:py-10 px-4 md:px-8 cursor-pointer transition-all duration-300 hover:bg-[#FAF6EF]"
+                className="group relative py-7 md:py-8 px-4 md:px-6 cursor-pointer transition-all duration-300 hover:bg-[#FAF6EF]"
               >
-                <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 items-center">
+                <div className="grid grid-cols-1 lg:grid-cols-12 gap-5 items-center">
                   {/* Service Number & Category */}
                   <div className="lg:col-span-2 flex items-center space-x-3 text-xs uppercase tracking-widest text-[#8C7B70]">
                     <span className="font-serif text-lg text-[#B6583B] group-hover:scale-110 transition-transform">
                       {service.number}
                     </span>
                     <span>—</span>
-                    <span>{service.category}</span>
+                    <span className="font-medium">{service.category}</span>
+                  </div>
+
+                  {/* Thumbnail Image Preview */}
+                  <div className="lg:col-span-2 hidden sm:block">
+                    <div className="relative w-full h-20 md:h-22 overflow-hidden border border-[#E6DBCB] shadow-xs">
+                      <Image
+                        src={service.image}
+                        alt={`${service.name} thumbnail`}
+                        fill
+                        sizes="160px"
+                        className="object-cover transition-transform duration-500 group-hover:scale-108"
+                        loading="lazy"
+                      />
+                    </div>
                   </div>
 
                   {/* Service Title */}
-                  <div className="lg:col-span-4">
-                    <h3 className="font-serif text-2xl sm:text-3xl md:text-4xl text-[#1C1512] group-hover:text-[#B6583B] transition-colors duration-300">
+                  <div className="lg:col-span-3">
+                    <h3 className="font-serif text-2xl sm:text-2xl md:text-3xl text-[#1C1512] group-hover:text-[#B6583B] transition-colors duration-300">
                       {service.name}
                     </h3>
                   </div>
 
                   {/* Short Description */}
-                  <div className="lg:col-span-4">
-                    <p className="text-sm md:text-base text-[#594D46] font-light leading-relaxed group-hover:text-[#1C1512] transition-colors">
+                  <div className="lg:col-span-3">
+                    <p className="text-sm text-[#594D46] font-light leading-relaxed group-hover:text-[#1C1512] transition-colors line-clamp-2 sm:line-clamp-none">
                       {service.shortDescription}
                     </p>
                   </div>
@@ -77,16 +93,16 @@ export default function Services() {
                       target="_blank"
                       rel="noopener noreferrer"
                       onClick={(e) => e.stopPropagation()}
-                      className="hidden sm:inline-flex items-center text-xs uppercase tracking-wider text-[#594D46] hover:text-[#B6583B] transition-colors"
+                      className="hidden sm:inline-flex items-center text-xs uppercase tracking-wider text-[#594D46] hover:text-[#B6583B] transition-colors font-medium"
                       title={`Book ${service.name} directly on WhatsApp`}
                     >
-                      <MessageSquare size={15} className="mr-1" />
+                      <MessageSquare size={14} className="mr-1 text-[#25D366]" />
                       <span>Book</span>
                     </a>
 
                     <div className="w-10 h-10 rounded-full border border-[#E6DBCB] group-hover:border-[#1C1512] group-hover:bg-[#1C1512] group-hover:text-[#FAF6EF] flex items-center justify-center transition-all duration-300">
                       <ArrowUpRight
-                        size={18}
+                        size={17}
                         className="transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform"
                       />
                     </div>
@@ -104,20 +120,30 @@ export default function Services() {
           })}
         </div>
 
-        {/* Note on Customized Sessions */}
-        <div className="mt-16 pt-8 border-t border-[#E6DBCB] flex flex-col sm:flex-row items-center justify-between text-xs text-[#8C7B70] space-y-4 sm:space-y-0">
+        {/* Note on Customized Sessions & Phone Booking */}
+        <div className="mt-14 pt-8 border-t border-[#E6DBCB] flex flex-col sm:flex-row items-center justify-between text-xs text-[#8C7B70] gap-4">
           <div className="flex items-center space-x-2">
             <Sparkles size={14} className="text-[#C29B53]" />
             <span>All sessions are personalized based on your individual comfort level.</span>
           </div>
-          <a
-            href={getWhatsAppBookingUrl()}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="text-[#1C1512] hover:text-[#B6583B] font-medium underline underline-offset-4 uppercase tracking-wider"
-          >
-            Have custom requirements? WhatsApp us directly
-          </a>
+          <div className="flex items-center space-x-4">
+            <a
+              href={SITE_CONFIG.phoneTel}
+              className="inline-flex items-center space-x-1.5 text-[#1C1512] hover:text-[#B6583B] font-medium uppercase tracking-wider"
+            >
+              <Phone size={13} className="text-[#B6583B]" />
+              <span>Call: {SITE_CONFIG.phoneFormatted}</span>
+            </a>
+            <span>•</span>
+            <a
+              href={getWhatsAppBookingUrl()}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-[#1C1512] hover:text-[#B6583B] font-medium underline underline-offset-4 uppercase tracking-wider"
+            >
+              Inquire on WhatsApp
+            </a>
+          </div>
         </div>
       </div>
 
