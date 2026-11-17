@@ -1,23 +1,22 @@
 import type { Metadata } from "next";
-import { Cormorant_Garamond, Plus_Jakarta_Sans } from "next/font/google";
+import { Lora, DM_Sans } from "next/font/google";
 import "./globals.css";
 import { SITE_CONFIG } from "@/lib/site";
 import { GOOGLE_MAPS_URL } from "@/lib/maps";
 import GoogleAnalytics from "@/components/analytics/GoogleAnalytics";
 import StickyMobileCTA from "@/components/ui/StickyMobileCTA";
 
-const cormorant = Cormorant_Garamond({
+const lora = Lora({
   subsets: ["latin"],
-  weight: ["300", "400", "500", "600", "700"],
   style: ["normal", "italic"],
-  variable: "--font-serif",
+  variable: "--font-lora",
   display: "swap",
 });
 
-const jakarta = Plus_Jakarta_Sans({
+const dmSans = DM_Sans({
   subsets: ["latin"],
-  weight: ["300", "400", "500", "600"],
-  variable: "--font-sans",
+  style: ["normal", "italic"],
+  variable: "--font-dm-sans",
   display: "swap",
 });
 
@@ -144,7 +143,7 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${cormorant.variable} ${jakarta.variable} scroll-smooth`}
+      className={`${lora.variable} ${dmSans.variable} scroll-smooth`}
     >
       <head>
         <script
